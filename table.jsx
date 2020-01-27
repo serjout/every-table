@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
-import createRow from './sub/createRow';
-import createHeader from './sub/createHeader';
+import createRow from './sub/create-row';
+import createHeader from './sub/create-header';
 import propTypes from 'prop-types';
 import cn from 'classnames';
 import sortBy from 'lodash/fp/sortBy';

@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import propTypes from 'prop-types';
-import DefaultCell from './DefaultCell';
-import SelectionCell from './SelectionCell';
+import DefaultCell from './default-cell';
+import SelectionCell from './selection-cell';
 import cn from 'classnames';
 
 import s from '../table.pcss';

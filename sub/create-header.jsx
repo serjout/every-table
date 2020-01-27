@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import propTypes from 'prop-types';
-import HeaderCell from './HeaderCell';
-import SelectionHeaderCell from './SelectionHeaderCell';
+import HeaderCell from './header-cell';
+import SelectionHeaderCell from './selection-header-cell';
 import cn from 'classnames';
 
 import s from '../table.pcss';
