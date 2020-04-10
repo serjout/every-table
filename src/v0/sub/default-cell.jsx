@@ -5,7 +5,7 @@ import get from 'lodash/fp/get';
 export default function DefaultCell({ record, columnKey, className }) {
   return (
     <td className={className}>
-      {get(columnKey, record)}
+      {String(get(columnKey, record))}
     </td>
   );
 }

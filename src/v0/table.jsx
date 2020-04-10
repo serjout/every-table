@@ -1,17 +1,17 @@
-import React, { PureComponent } from 'react';
-import createRow from './sub/create-row';
-import createHeader from './sub/create-header';
-import propTypes from 'prop-types';
-import cn from 'classnames';
-import sortBy from 'lodash/fp/sortBy';
-import valuesIn from 'lodash/fp/valuesIn';
-import reverse from 'lodash/fp/reverse';
-import omit from 'lodash/fp/omit';
-import flow from 'lodash/fp/flow';
+import React, { PureComponent } from "react";
+import createRow from "./sub/create-row";
+import createHeader from "./sub/create-header";
+import propTypes from "prop-types";
+import cn from "classnames";
+import sortBy from "lodash/fp/sortBy";
+import valuesIn from "lodash/fp/valuesIn";
+import reverse from "lodash/fp/reverse";
+import omit from "lodash/fp/omit";
+import flow from "lodash/fp/flow";
 
-import s from './table.pcss';
+import s from "./table.pcss";
 
-export default class Table extends PureComponent {
+class Table extends PureComponent {
   static propTypes = {
     columns: propTypes.arrayOf(
       propTypes.shape({
@@ -92,15 +92,12 @@ export default class Table extends PureComponent {
       onChangeSelection,
       onRowClick,
     } = this.props;
-    const {
-      Header,
-      Row,
-    } = this.subComponents;
+    const { Header, Row } = this.subComponents;
     const processedSelection = this.processSelection(selection);
     const processedRecords = this.processDataObject(records);
 
     return (
-      <table className={cn(s.Table, className)} >
+      <table className={cn(s.Table, className)}>
         <thead>
           <Header
             idKey={idKey}
@@ -115,19 +112,21 @@ export default class Table extends PureComponent {
           />
         </thead>
         <tbody>
-          {processedRecords.map(rec => {
+          {processedRecords.map((rec) => {
             const id = rec[idKey];
 
-            return (<Row
-              key={id}
-              record={rec}
-              hiddenColumns={hiddenColumns}
-              className={rowClassName}
-              cellClassName={cellClassName}
-              onClick={onRowClick}
-              onChangeRowSelection={this.handleChangeRowSelection}
-              isSelected={selection && !!selection[id]}
-            />);
+            return (
+              <Row
+                key={id}
+                record={rec}
+                hiddenColumns={hiddenColumns}
+                className={rowClassName}
+                cellClassName={cellClassName}
+                onClick={onRowClick}
+                onChangeRowSelection={this.handleChangeRowSelection}
+                isSelected={selection && !!selection[id]}
+              />
+            );
           })}
         </tbody>
       </table>
@@ -143,10 +142,10 @@ export default class Table extends PureComponent {
   sortValues = flow(
     valuesIn,
     sortBy([this.props.sortKey, this.props.idKey]),
-    arr => this.props.isSortReverse ? reverse(arr) : arr
+    (arr) => (this.props.isSortReverse ? reverse(arr) : arr)
   );
 
-  processDataObject = records => {
+  processDataObject = (records) => {
     if (Array.isArray(records) && !this.props.forceSort) {
       return records;
     }
@@ -158,19 +157,23 @@ export default class Table extends PureComponent {
     const { columns, selection } = nextProps;
     const hasSelection = !!selection;
 
-    if (props && props.columns === columns && !!props.selection === hasSelection) {
+    if (
+      props &&
+      props.columns === columns &&
+      !!props.selection === hasSelection
+    ) {
       return;
     }
 
     const allColumns = hasSelection
-      ? [{ columnKey: '$selection' }, ...columns]
+      ? [{ columnKey: "$selection" }, ...columns]
       : columns;
 
     this.subComponents = {
       Header: createHeader(allColumns),
       Row: createRow(allColumns),
     };
-  };
-
-
+  }
 }
+
+export { Table };
